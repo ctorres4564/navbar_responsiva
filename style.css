@@ -1,0 +1,268 @@
+/* --- START OF FILE style.css --- */
+
+html {
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden; /* Ajuda a prevenir scroll horizontal indesejado */
+  background: #fff;
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+/* ===== NAVBAR ESTILOS GERAIS ===== */
+.nav {
+  height: 5rem; /* Altura da navbar em desktop */
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Logo à esquerda, links à direita */
+  align-items: center;
+  padding: 0 4vw; /* Espaçamento lateral */
+  position: fixed; /* Fixa a navbar no topo */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10; /* Garante que a navbar fique sobre outros elementos */
+  background: #fff; /* Fundo branco para a navbar desktop */
+  transition: transform 0.4s ease; /* Para a transição do menu mobile */
+}
+
+.nav__list {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end; /* Alinha os itens da lista à direita */
+  gap: 20px; /* Espaçamento entre os links */
+}
+
+.nav__link {
+  position: relative;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  padding: 16px 12px;
+  letter-spacing: 1px;
+  color: #111; /* Cor dos links na navbar desktop */
+  transition: 0.3s;
+}
+
+.nav__link::before {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #000; /* Cor da linha sob o link */
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: transform 0.2s ease-out;
+}
+
+.nav__link:hover::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+
+.logo {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #160808;
+  display: flex; /* Para alinhar o conteúdo do logo, se houver mais de um elemento */
+  align-items: center;
+  padding: 0 1rem;
+}
+
+/* ===== BOTÃO HAMBÚRGUER (NAV-TOGGLE) ===== */
+.nav-toggle {
+  display: none; /* Escondido em telas maiores */
+  padding: 2.3em; /* Área de clique maior */
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  position: absolute; /* Posição absoluta para ficar no canto */
+  right: 0.5rem;
+  top: 1.1rem;
+  z-index: 1000; /* Muito alto para garantir que fique sobre tudo, inclusive o menu quando desliza */
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+  background-color: #111; /* Cor do hambúrguer (preto por padrão) */
+  width: 2em;
+  height: 3px;
+  border-radius: 1em;
+  transition: transform 250ms ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: #111; /* Cor das barras do hambúrguer */
+  width: 2em;
+  height: 3px;
+  border-radius: 1em;
+  transition: transform 250ms ease-in-out;
+}
+
+.hamburger::before { top: 6px; }
+.hamburger::after { bottom: 6px; }
+
+/* Estilos para o hambúrguer quando o menu está aberto (transforma em 'X') */
+.nav-open .hamburger {
+  transform: rotate(0.625turn); /* Rotaciona a barra do meio */
+}
+
+.nav-open .hamburger::before {
+  transform: rotate(90deg) translateX(-6px); /* Rotaciona e ajusta a barra de cima */
+}
+
+.nav-open .hamburger::after {
+  opacity: 0; /* Esconde a barra de baixo */
+}
+
+/* Cor do hambúrguer quando o menu (escuro) está aberto */
+.nav-open .hamburger,
+.nav-open .hamburger::before {
+  background-color: #fff; /* Muda para branco para contraste com o fundo escuro do menu */
+}
+
+.smalllogo {
+  display: none; /* Escondido em telas maiores, aparece no menu mobile */
+  padding: 4.7vh 8vw;
+  text-align: center;
+  align-items: center;
+  color: #111; /* Cor do texto do logo pequeno (no HTML está dentro de um <a> com <h2>) */
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+}
+/* Ajuste para a cor do link do smalllogo, já que o menu mobile tem fundo escuro */
+.smalllogo a h2 {
+    color: #fff;
+}
+.smalllogo a h2 i {
+    color: #fff; /* Se o ícone não herdar a cor */
+}
+
+
+/* ===== SEÇÕES DA PÁGINA ===== */
+section {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  min-height: 110vh; /* Altura mínima para ocupar a tela e permitir scroll */
+  /* padding-top: 5rem;  Se precisar de espaçamento para a navbar fixa, adicione aqui ou no primeiro elemento filho da section */
+}
+.one { background-color: #fff; }
+.two { background-color: rgb(190, 183, 170); }
+.three { background-color: rgb(63, 118, 238); }
+.four { background-color: rgb(221, 22, 88); }
+.five { background-color: rgb(163, 114, 8); }
+
+
+/* ===== ESTILOS RESPONSIVOS (MOBILE) ===== */
+@media (max-width: 800px) {
+  .logo {
+    display: none; /* Esconde o logo principal em telas pequenas */
+  }
+
+  .nav__link::before {
+    background-color: #fff; /* Linha sob o link no menu mobile (fundo escuro) */
+  }
+
+  .smalllogo {
+    display: flex; /* Mostra o logo pequeno dentro do menu mobile */
+    justify-content: center; /* Centraliza o logo pequeno */
+    width: 100%; /* Para ocupar a largura do menu */
+    /* O padding e outros estilos já estão definidos acima */
+  }
+
+  .nav-toggle {
+    display: block; /* Mostra o botão hambúrguer */
+  }
+
+  /* Estilos para o menu de navegação quando em modo mobile */
+  .nav {
+    flex-direction: column; /* Itens do menu empilhados verticalmente */
+    justify-content: flex-start; /* Alinha itens ao topo */
+    align-items: flex-start; /* Alinha itens à esquerda (antes de centralizar a lista) */
+    
+    /* Move o menu para fora da tela por padrão */
+    transform: translateX(100%);
+    /* A transição já está definida no .nav geral */
+    
+    height: 100vh; /* Menu ocupa a altura toda da tela */
+    background-color: #111; /* Fundo escuro para o menu mobile */
+    padding-top: 0; /* Resetar o padding-top, o smalllogo e a lista terão seus próprios espaçamentos */
+    /* O position: fixed; e z-index: 10; são herdados do .nav geral */
+  }
+
+  /* Estilos para o menu quando está aberto (classe 'nav-open' no body) */
+  .nav-open .nav {
+    transform: translateX(0); /* Traz o menu para a tela */
+    width: 100vw; /* Garante que ocupe toda a largura */
+    /* O padding do .nav é aplicado à área geral do menu que desliza.
+       O .smalllogo e .nav__list são posicionados dentro dele.
+       O padding-top: 5rem foi removido e ajustado para o .smalllogo e .nav__list para melhor controle */
+  }
+  
+  .nav__list {
+    flex-direction: column; /* Links empilhados */
+    justify-content: space-evenly; /* Distribui espaço entre os links */
+    align-items: center; /* Centraliza os links */
+    text-align: center; /* Centraliza o texto dos links */
+    padding: 2rem 0; /* Espaçamento vertical para a lista de links, pode ajustar conforme o visual */
+    width: 100%; /* Lista ocupa toda a largura do menu */
+    flex-grow: 1; /* Faz a lista ocupar o espaço restante no menu */
+    /* O padding: 135px 0; original pode ser muito, ajuste para melhor encaixe com o smalllogo */
+  }
+
+  .nav__link {
+    color: #fff; /* Cor dos links no menu mobile */
+    margin: 0; /* Remove margens se houver */
+    padding: 1rem 0; /* Ajusta padding para toque em mobile */
+    width: 100%; /* Faz o link ocupar toda a largura para melhor área de clique */
+    display: block; /* Para que o width 100% funcione bem */
+  }
+
+  /* As cores do hambúrguer quando aberto já estão definidas fora da media query
+     .nav-open .hamburger,
+     .nav-open .hamburger::before {
+       background-color: #fff;
+     }
+  */
+}
+
+/* Adicione um padding-top ao body ou às seções se a navbar fixa estiver cobrindo o conteúdo */
+body.nav-open {
+  /* Se o menu aberto causar scroll no body, pode ser necessário desabilitar o scroll do body
+     overflow-y: hidden; 
+     Mas cuidado, pois o menu (.nav) em si deve ser scrollável se tiver muitos itens e height: 100vh.
+     Nesse caso, o .nav precisaria de overflow-y: auto;
+  */
+}
+
+/* Para compensar a altura da navbar fixa no conteúdo principal */
+section:first-of-type {
+    padding-top: 5rem; /* Altura da navbar desktop */
+}
+
+@media (max-width: 800px) {
+    section:first-of-type {
+        padding-top: 0; /* Em mobile, o menu desliza sobre, não empurra o conteúdo */
+    }
+}
